@@ -6,6 +6,111 @@
   },
   "item": [
     {
+      "name": "Feature - Registrar Solicitud DNIe",
+      "item": [
+        {
+          "name": "Crear solicitud de DNIe (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"dni_ciudadano\":\"12345678\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie",
+              "host": ["{{base_url}}"],
+              "path": ["api", "solicitudes-dnie"]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// GIVEN un ciudadano con DNI valido de 8 digitos y datos completos"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// WHEN se envia un POST a /api/solicitudes-dnie",
+                  "",
+                  "// THEN la respuesta es 201 Created",
+                  "pm.test('Status code es 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test('La solicitud fue creada con estado REGISTRADA', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id_solicitud).to.be.a('number');",
+                  "    pm.expect(jsonData.estado).to.eql('REGISTRADA');",
+                  "    pm.expect(jsonData.dni_ciudadano).to.eql('12345678');",
+                  "});",
+                  "",
+                  "// Se guarda el id generado para reutilizarlo en los siguientes requests",
+                  "pm.environment.set('id_solicitud_creada', pm.response.json().id_solicitud);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Rechazar solicitud con DNI invalido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"dni_ciudadano\":\"123\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie",
+              "host": ["{{base_url}}"],
+              "path": ["api", "solicitudes-dnie"]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// GIVEN un DNI con menos de 8 digitos"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// WHEN se envia el POST",
+                  "",
+                  "// THEN la respuesta es 400 Bad Request con un mensaje de error informativo",
+                  "pm.test('Status code es 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "pm.test('El mensaje de error es informativo', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('error');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Feature - Listar Solicitudes DNIe",
       "item": [
         {

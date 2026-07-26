@@ -9,3 +9,20 @@ _service: ISolicitudDNIeService = None
 def listar_solicitudes():
     solicitudes = _service.listar_solicitudes()
     return jsonify([s.a_diccionario() for s in solicitudes]), 200
+
+def inicializar_controlador(servicio: ISolicitudDNIeService):
+    global _service
+    _service = servicio
+
+@solicitud_dnie_bp.post("")
+def crear_solicitud():
+    datos = request.get_json(silent=True) or {}
+    try:
+        solicitud = _service.registrar_solicitud(
+            dni_ciudadano=datos.get("dni_ciudadano"),
+            nombres=datos.get("nombres"),
+            apellidos=datos.get("apellidos"),
+        )
+        return jsonify(solicitud.a_diccionario()), 201
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 400
