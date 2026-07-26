@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "EmisionDNIe - Pruebas de Aceptación (BDD)",
+    "description": "Colección de pruebas de aceptación para el servicio REST de Solicitudes de DNIe, organizada por feature siguiendo el enfoque BDD (Given-When-Then).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Feature - Listar Solicitudes DNIe",
+      "item": [
+        {
+          "name": "Listar todas las solicitudes (200)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie",
+              "host": ["{{base_url}}"],
+              "path": ["api", "solicitudes-dnie"]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// GIVEN que existe al menos una solicitud registrada previamente"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// WHEN se envia un GET a /api/solicitudes-dnie",
+                  "",
+                  "// THEN la respuesta debe ser 200 OK",
+                  "pm.test('Status code es 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// AND debe retornar un arreglo no vacio",
+                  "pm.test('La lista de solicitudes no esta vacia', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "    pm.expect(jsonData.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
