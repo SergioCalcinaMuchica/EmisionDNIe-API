@@ -12,4 +12,15 @@ class SolicitudDNIeService(ISolicitudDNIeService):
     def listar_solicitudes(self) -> List[SolicitudDNIe]:
         return self._repositorio.listar()
     
-    
+    def registrar_solicitud(self, dni_ciudadano: str, nombres: str, apellidos: str) -> SolicitudDNIe:
+        if not dni_ciudadano or len(dni_ciudadano) != 8:
+            raise ValueError("dni_ciudadano debe tener 8 dígitos")
+        if not nombres or not apellidos:
+            raise ValueError("nombres y apellidos son obligatorios")
+
+        solicitud = SolicitudDNIe(
+            dni_ciudadano=dni_ciudadano,
+            nombres=nombres,
+            apellidos=apellidos,
+        )
+        return self._repositorio.crear(solicitud)
