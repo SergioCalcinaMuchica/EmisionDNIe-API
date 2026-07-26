@@ -1,0 +1,3 @@
+from src.aplicacion.interfaces.i_solicitud_dnie_service import ISolicitudDNIeService
+from src.dominio.modelo.solicitud_dnie import SolicitudDNIe
+from src.dominio.repositorio.i_solicitud_dnie_repository import ISolicitudDNIeRepository

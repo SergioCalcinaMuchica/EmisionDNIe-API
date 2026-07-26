@@ -1,0 +1,1 @@
+from src.aplicacion.interfaces.i_solicitud_dnie_service import ISolicitudDNIeService
