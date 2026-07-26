@@ -11,3 +11,5 @@ class SolicitudDNIeService(ISolicitudDNIeService):
 
     def listar_solicitudes(self) -> List[SolicitudDNIe]:
         return self._repositorio.listar()
+    
+    
