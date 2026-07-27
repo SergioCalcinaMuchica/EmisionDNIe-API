@@ -1,20 +1,20 @@
 from flask import Flask
 
-from src.aplicacion.servicios.solicitud_dnie_service import SolicitudDNIeService
-from src.infraestructura.repositorio.solicitud_dnie_repository_impl import SolicitudDNIeRepositoryImpl
+# Importamos la función desde el archivo dependencies.py de la raíz
+from dependencies import inicializar_dependencias
+
 from src.presentacion.controladores.solicitud_dnie_controller import (
     inicializar_controlador,
     solicitud_dnie_bp,
 )
 
-
 def crear_app() -> Flask:
     app = Flask(__name__)
 
-    repositorio = SolicitudDNIeRepositoryImpl()
+    # Obtenemos el servicio ya instanciado desde el Composition Root
+    servicio = inicializar_dependencias()
 
-    servicio = SolicitudDNIeService(repositorio)
-
+    # Lo conectamos con el controlador y registramos las rutas
     inicializar_controlador(servicio)
     app.register_blueprint(solicitud_dnie_bp)
 
