@@ -20,6 +20,7 @@ def obtener_solicitud(id_solicitud: int):
 def inicializar_controlador(servicio: ISolicitudDNIeService):
     global _service
     _service = servicio
+    
 
 @solicitud_dnie_bp.post("")
 def crear_solicitud():
