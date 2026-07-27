@@ -27,3 +27,6 @@ class SolicitudDNIeService(ISolicitudDNIeService):
             apellidos=apellidos,
         )
         return self._repositorio.crear(solicitud)
+
+    def eliminar_solicitud(self, id_solicitud: int) -> bool:
+        return self._repositorio.eliminar(id_solicitud)
