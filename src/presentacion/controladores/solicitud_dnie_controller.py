@@ -34,3 +34,10 @@ def crear_solicitud():
         return jsonify(solicitud.a_diccionario()), 201
     except ValueError as error:
         return jsonify({"error": str(error)}), 400
+
+@solicitud_dnie_bp.delete("/<int:id_solicitud>")
+def eliminar_solicitud(id_solicitud: int):
+    eliminado = _service.eliminar_solicitud(id_solicitud)
+    if not eliminado:
+        return jsonify({"error": "Solicitud no encontrada"}), 404
+    return "", 204
