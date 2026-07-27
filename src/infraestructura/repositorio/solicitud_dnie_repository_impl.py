@@ -13,6 +13,10 @@ class SolicitudDNIeRepositoryImpl(ISolicitudDNIeRepository):
         self._siguiente_id += 1
         return solicitud
 
+    def actualizar(self, solicitud: SolicitudDNIe) -> SolicitudDNIe:
+        self._almacen[solicitud.id_solicitud] = solicitud
+        return solicitud
+
     def buscar_por_id(self, id_solicitud: int) -> Optional[SolicitudDNIe]:
         return self._almacen.get(id_solicitud)
 
