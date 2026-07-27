@@ -8,6 +8,10 @@ class ISolicitudDNIeRepository(ABC):
         ...
 
     @abstractmethod
+    def actualizar(self, solicitud: SolicitudDNIe) -> SolicitudDNIe:
+        ...
+
+    @abstractmethod
     def buscar_por_id(self, id_solicitud: int) -> Optional[SolicitudDNIe]:
         ...
 
