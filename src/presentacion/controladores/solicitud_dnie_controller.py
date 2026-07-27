@@ -35,6 +35,17 @@ def crear_solicitud():
     except ValueError as error:
         return jsonify({"error": str(error)}), 400
 
+@solicitud_dnie_bp.put("/<int:id_solicitud>")
+def actualizar_solicitud(id_solicitud: int):
+    datos = request.get_json(silent=True) or {}
+    try:
+        solicitud = _service.actualizar_solicitud(id_solicitud, datos)
+        if solicitud is None:
+            return jsonify({"error": "Solicitud no encontrada"}), 404
+        return jsonify(solicitud.a_diccionario()), 200
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 400
+
 @solicitud_dnie_bp.delete("/<int:id_solicitud>")
 def eliminar_solicitud(id_solicitud: int):
     eliminado = _service.eliminar_solicitud(id_solicitud)
