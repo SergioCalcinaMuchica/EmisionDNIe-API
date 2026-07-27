@@ -1,10 +1,14 @@
 from src.dominio.modelo.solicitud_dnie import SolicitudDNIe
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Optional
 
 class ISolicitudDNIeService(ABC):
     @abstractmethod
     def registrar_solicitud(self, dni_ciudadano: str, nombres: str, apellidos: str) -> SolicitudDNIe:
+        ...
+
+    @abstractmethod
+    def obtener_solicitud(self, id_solicitud: int) -> Optional[SolicitudDNIe]:
         ...
 
     @abstractmethod
