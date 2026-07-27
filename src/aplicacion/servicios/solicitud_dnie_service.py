@@ -30,3 +30,17 @@ class SolicitudDNIeService(ISolicitudDNIeService):
 
     def eliminar_solicitud(self, id_solicitud: int) -> bool:
         return self._repositorio.eliminar(id_solicitud)
+
+    def actualizar_solicitud(self, id_solicitud: int, datos: dict) -> Optional[SolicitudDNIe]:
+        solicitud = self._repositorio.buscar_por_id(id_solicitud)
+        if solicitud is None:
+            return None
+
+        if "nombres" in datos:
+            solicitud.nombres = datos["nombres"]
+        if "apellidos" in datos:
+            solicitud.apellidos = datos["apellidos"]
+        if "estado" in datos:
+            solicitud.cambiar_estado(datos["estado"])
+
+        return self._repositorio.actualizar(solicitud)

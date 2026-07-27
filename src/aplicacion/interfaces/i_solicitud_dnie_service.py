@@ -8,6 +8,10 @@ class ISolicitudDNIeService(ABC):
         ...
 
     @abstractmethod
+    def actualizar_solicitud(self, id_solicitud: int, datos: dict) -> Optional[SolicitudDNIe]:
+        ...
+
+    @abstractmethod
     def obtener_solicitud(self, id_solicitud: int) -> Optional[SolicitudDNIe]:
         ...
 

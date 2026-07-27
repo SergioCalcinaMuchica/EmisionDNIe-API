@@ -1,8 +1,11 @@
 {
   "info": {
+    "_postman_id": "a699fdbc-f9b4-47ca-a3d5-1dff2655aa0a",
     "name": "EmisionDNIe - Pruebas de Aceptación (BDD)",
     "description": "Colección de pruebas de aceptación para el servicio REST de Solicitudes de DNIe, organizada por feature siguiendo el enfoque BDD (Given-When-Then).",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56917524",
+    "_collection_link": "https://go.postman.co/collection/56917524-a699fdbc-f9b4-47ca-a3d5-1dff2655aa0a?source=collection_link"
   },
   "item": [
     {
@@ -10,21 +13,6 @@
       "item": [
         {
           "name": "Crear solicitud de DNIe (201)",
-          "request": {
-            "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"dni_ciudadano\":\"12345678\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
-            },
-            "url": {
-              "raw": "{{base_url}}/api/solicitudes-dnie",
-              "host": ["{{base_url}}"],
-              "path": ["api", "solicitudes-dnie"]
-            }
-          },
           "event": [
             {
               "listen": "prerequest",
@@ -59,25 +47,34 @@
                 ]
               }
             }
-          ]
-        },
-        {
-          "name": "Rechazar solicitud con DNI invalido (400)",
+          ],
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"dni_ciudadano\":\"123\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
+              "raw": "{\"dni_ciudadano\":\"12345678\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
             },
             "url": {
               "raw": "{{base_url}}/api/solicitudes-dnie",
-              "host": ["{{base_url}}"],
-              "path": ["api", "solicitudes-dnie"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie"
+              ]
             }
           },
+          "response": []
+        },
+        {
+          "name": "Rechazar solicitud con DNI invalido (400)",
           "event": [
             {
               "listen": "prerequest",
@@ -106,7 +103,31 @@
                 ]
               }
             }
-          ]
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"dni_ciudadano\":\"123\",\"nombres\":\"Juan\",\"apellidos\":\"Perez\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -115,14 +136,6 @@
       "item": [
         {
           "name": "Consultar solicitud existente (200)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{base_url}}/api/solicitudes-dnie/{{id_solicitud_creada}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "solicitudes-dnie", "{{id_solicitud_creada}}"]
-            }
-          },
           "event": [
             {
               "listen": "prerequest",
@@ -153,18 +166,26 @@
                 ]
               }
             }
-          ]
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/{{id_solicitud_creada}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie",
+                "{{id_solicitud_creada}}"
+              ]
+            }
+          },
+          "response": []
         },
         {
           "name": "Consultar solicitud inexistente (404)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{base_url}}/api/solicitudes-dnie/999999",
-              "host": ["{{base_url}}"],
-              "path": ["api", "solicitudes-dnie", "999999"]
-            }
-          },
           "event": [
             {
               "listen": "prerequest",
@@ -189,7 +210,23 @@
                 ]
               }
             }
-          ]
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/999999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie",
+                "999999"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -198,14 +235,6 @@
       "item": [
         {
           "name": "Listar todas las solicitudes (200)",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{base_url}}/api/solicitudes-dnie",
-              "host": ["{{base_url}}"],
-              "path": ["api", "solicitudes-dnie"]
-            }
-          },
           "event": [
             {
               "listen": "prerequest",
@@ -237,7 +266,143 @@
                 ]
               }
             }
-          ]
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Feature - Actualizar Solicitud DNIe",
+      "item": [
+        {
+          "name": "Cambiar estado a HUELLAS_CAPTURADAS (200)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// GIVEN una solicitud en estado REGISTRADA (id_solicitud_creada)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// WHEN se envia un PUT cambiando el estado a HUELLAS_CAPTURADAS\r",
+                  "\r",
+                  "     pm.test('Status code es 200', function () {\r",
+                  "         pm.response.to.have.status(200);\r",
+                  "     });\r",
+                  "\r",
+                  "     pm.test('El estado fue actualizado correctamente', function () {\r",
+                  "         pm.expect(pm.response.json().estado).to.eql('HUELLAS_CAPTURADAS');\r",
+                  "     });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"estado\": \"HUELLAS_CAPTURADAS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/{{id_solicitud_creada}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie",
+                "{{id_solicitud_creada}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar solicitud inexistente (404)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// GIVEN un ID de solicitud que no existe"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// WHEN se envia un PUT a ese ID\r",
+                  "\r",
+                  "   pm.test('Status code es 404', function () {\r",
+                  "       pm.response.to.have.status(404);\r",
+                  "   });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"estado\": \"HUELLAS_CAPTURADAS\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/999999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes-dnie",
+                "999999"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }
