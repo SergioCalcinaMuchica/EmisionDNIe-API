@@ -14,3 +14,7 @@ class ISolicitudDNIeRepository(ABC):
     @abstractmethod
     def listar(self) -> List[SolicitudDNIe]:
         ...
+        
+    @abstractmethod
+    def eliminar(self, id_solicitud: int) -> bool:
+        ...
