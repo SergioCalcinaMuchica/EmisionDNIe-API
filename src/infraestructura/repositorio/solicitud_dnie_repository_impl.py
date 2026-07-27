@@ -18,3 +18,9 @@ class SolicitudDNIeRepositoryImpl(ISolicitudDNIeRepository):
 
     def listar(self) -> List[SolicitudDNIe]:
         return list(self._almacen.values())
+    
+    def eliminar(self, id_solicitud: int) -> bool:
+        if id_solicitud in self._almacen:
+            del self._almacen[id_solicitud]
+            return True
+        return False
