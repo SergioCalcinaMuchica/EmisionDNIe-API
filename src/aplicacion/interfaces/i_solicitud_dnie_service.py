@@ -14,3 +14,7 @@ class ISolicitudDNIeService(ABC):
     @abstractmethod
     def listar_solicitudes(self) -> List[SolicitudDNIe]:
         ...
+
+    @abstractmethod
+    def eliminar_solicitud(self, id_solicitud: int) -> bool:
+        ...
