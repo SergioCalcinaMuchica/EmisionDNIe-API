@@ -111,6 +111,89 @@
       ]
     },
     {
+      "name": "Feature - Consultar Solicitud DNIe",
+      "item": [
+        {
+          "name": "Consultar solicitud existente (200)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/{{id_solicitud_creada}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "solicitudes-dnie", "{{id_solicitud_creada}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// GIVEN una solicitud previamente registrada (id_solicitud_creada)"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// WHEN se envia un GET a /api/solicitudes-dnie/{id}",
+                  "",
+                  "// THEN la respuesta es 200 OK",
+                  "pm.test('Status code es 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// AND el id retornado coincide con el solicitado",
+                  "pm.test('El id retornado coincide con el solicitado', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(String(jsonData.id_solicitud)).to.eql(String(pm.environment.get('id_solicitud_creada')));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Consultar solicitud inexistente (404)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/solicitudes-dnie/999999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "solicitudes-dnie", "999999"]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// GIVEN un ID que no existe en el sistema"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// WHEN se envia un GET a /api/solicitudes-dnie/999999",
+                  "",
+                  "// THEN la respuesta es 404 Not Found",
+                  "pm.test('Status code es 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Feature - Listar Solicitudes DNIe",
       "item": [
         {

@@ -11,6 +11,9 @@ class SolicitudDNIeService(ISolicitudDNIeService):
 
     def listar_solicitudes(self) -> List[SolicitudDNIe]:
         return self._repositorio.listar()
+
+    def obtener_solicitud(self, id_solicitud: int) -> Optional[SolicitudDNIe]:
+        return self._repositorio.buscar_por_id(id_solicitud)
     
     def registrar_solicitud(self, dni_ciudadano: str, nombres: str, apellidos: str) -> SolicitudDNIe:
         if not dni_ciudadano or len(dni_ciudadano) != 8:
