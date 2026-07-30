@@ -82,4 +82,9 @@ Cada request está organizado como feature (carpeta) con escenarios Given-When-T
 
 ## Equipo
 
-_(Completar con nombres e integrantes, y su respectiva contribución/commit)_
+- Sergio Calcina Muchica
+- Joaquin Castelo Choque
+- Anthony Condorios Chambi
+- Fernando Chavez Medina
+- Gerald Supo Molina
+- Marcelo Quina Delgado
